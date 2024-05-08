@@ -2,6 +2,7 @@ package com.iggyzxc.todomanagement.service.impl;
 
 import com.iggyzxc.todomanagement.dto.TodoDTO;
 import com.iggyzxc.todomanagement.entity.Todo;
+import com.iggyzxc.todomanagement.exception.ResourceNotFoundException;
 import com.iggyzxc.todomanagement.repository.TodoRepository;
 import com.iggyzxc.todomanagement.service.TodoService;
 import lombok.AllArgsConstructor;
@@ -27,7 +28,8 @@ public class TodoServiceImpl implements TodoService {
 
     @Override
     public TodoDTO getTodo(Long id) {
-        Todo todo = todoRepository.findById(id).orElseThrow(() -> new RuntimeException("Id not found."));
+        Todo todo = todoRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Todo not found with id: " + id));
         return modelMapper.map(todo, TodoDTO.class);
     }
 
