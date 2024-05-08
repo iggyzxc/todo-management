@@ -1,6 +1,8 @@
 package com.iggyzxc.todomanagement.controller;
 
 import com.iggyzxc.todomanagement.dto.TodoDTO;
+import com.iggyzxc.todomanagement.exception.ResourceNotFoundException;
+import com.iggyzxc.todomanagement.repository.TodoRepository;
 import com.iggyzxc.todomanagement.service.TodoService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 public class TodoController {
 
+    private final TodoRepository todoRepository;
     private TodoService todoService;
 
     @PostMapping
@@ -33,4 +36,11 @@ public class TodoController {
         List<TodoDTO> todos = todoService.getAllTodos();
         return ResponseEntity.ok(todos);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<TodoDTO> updateTodo(@PathVariable Long id, @RequestBody TodoDTO todoDTO) {
+        TodoDTO updatedTodo = todoService.updateTodo(id, todoDTO);
+        return ResponseEntity.ok(updatedTodo);
+    }
+
 }
