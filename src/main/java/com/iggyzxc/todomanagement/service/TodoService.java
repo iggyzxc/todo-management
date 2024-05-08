@@ -1,22 +1,22 @@
 package com.iggyzxc.todomanagement.service;
 
-import com.iggyzxc.todomanagement.entity.Todo;
+import com.iggyzxc.todomanagement.dto.TodoDTO;
 
 import java.util.List;
 
 public interface TodoService {
 
-    Todo addTodo(Todo todoDTO);
+    TodoDTO addTodo(TodoDTO todoDTO);
 
-    Todo getTodo(Long id);
+    TodoDTO getTodo(Long id);
 
-    List<Todo> getTodos();
+    List<TodoDTO> getTodos();
 
-    Todo updateTodo(Long id, Todo todoDTO);
+    TodoDTO updateTodo(Long id, TodoDTO todoDTO);
 
     void deleteTodo(Long id);
 
-    Todo completeTodo(Long id);
+    TodoDTO completeTodo(Long id);
 
-    Todo incompleteTodo(Long id);
+    TodoDTO incompleteTodo(Long id);
 }

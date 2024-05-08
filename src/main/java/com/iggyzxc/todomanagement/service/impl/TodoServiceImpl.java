@@ -1,9 +1,11 @@
 package com.iggyzxc.todomanagement.service.impl;
 
+import com.iggyzxc.todomanagement.dto.TodoDTO;
 import com.iggyzxc.todomanagement.entity.Todo;
 import com.iggyzxc.todomanagement.repository.TodoRepository;
 import com.iggyzxc.todomanagement.service.TodoService;
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,23 +16,27 @@ public class TodoServiceImpl implements TodoService {
 
     private TodoRepository todoRepository;
 
+    private ModelMapper modelMapper;
+
     @Override
-    public Todo addTodo(Todo todoDTO) {
+    public TodoDTO addTodo(TodoDTO todoDTO) {
+        Todo todo = modelMapper.map(todoDTO, Todo.class);
+        Todo savedTodo = todoRepository.save(todo);
+        return modelMapper.map(savedTodo, TodoDTO.class);
+    }
+
+    @Override
+    public TodoDTO getTodo(Long id) {
         return null;
     }
 
     @Override
-    public Todo getTodo(Long id) {
-        return null;
-    }
-
-    @Override
-    public List<Todo> getTodos() {
+    public List<TodoDTO> getTodos() {
         return List.of();
     }
 
     @Override
-    public Todo updateTodo(Long id, Todo todoDTO) {
+    public TodoDTO updateTodo(Long id, TodoDTO todoDTO) {
         return null;
     }
 
@@ -40,12 +46,12 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
-    public Todo completeTodo(Long id) {
+    public TodoDTO completeTodo(Long id) {
         return null;
     }
 
     @Override
-    public Todo incompleteTodo(Long id) {
+    public TodoDTO incompleteTodo(Long id) {
         return null;
     }
 }
