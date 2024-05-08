@@ -10,7 +10,7 @@ public interface TodoService {
 
     TodoDTO getTodo(Long id);
 
-    List<TodoDTO> getTodos();
+    List<TodoDTO> getAllTodos();
 
     TodoDTO updateTodo(Long id, TodoDTO todoDTO);
 

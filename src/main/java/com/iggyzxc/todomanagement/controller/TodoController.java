@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/todos")
 @AllArgsConstructor
@@ -22,7 +24,13 @@ public class TodoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<TodoDTO> getTodo(@PathVariable Long id) {
-        TodoDTO savedTodo = todoService.getTodo(id);
-        return ResponseEntity.ok(savedTodo);
+        TodoDTO todo = todoService.getTodo(id);
+        return ResponseEntity.ok(todo);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<TodoDTO>> getAllTodos() {
+        List<TodoDTO> todos = todoService.getAllTodos();
+        return ResponseEntity.ok(todos);
     }
 }
